@@ -148,15 +148,18 @@ namespace DMX_Artnet
                         packet.BindIndex = 1;
                         packet.MacAddress = firstMacAddress;
                         packet.Status2 = 0x0c;
+                        packet.Oem = 0x04b4;
+                        packet.EstaCode = 0x4d41;
                         Thread t = new Thread(() =>
                         {
                             socket.Send(packet);
-                            AddLog("=> Poll Reply sent !");
+                            if (Checkbox_PollPacketLogs.Checked)
+                                AddLog("=> Poll Reply sent !");
                         });
                         t.Start();
                     }
                     else
-                        AddLog("ERROR: Packet is null");
+                        AddLog("ERROR: lastIPReceived is null");
                 }
                 catch(InvalidCastException ex)
                 {
@@ -182,6 +185,18 @@ namespace DMX_Artnet
                 FlashLabel(Label_DMXReceived);
                 if (Checkbox_DMXPacketLogs.Checked)
                     LogPacket(e.Packet);
+                try
+                {
+                    ArtNetDmxPacket dmxPacket = (ArtNetDmxPacket)e.Packet;
+                    if (Checkbox_DMXPacketLogs.Checked)
+                    {
+                        AddLog("    DmxData[0]" + dmxPacket.DmxData[0]);
+                    }
+                }
+                catch(InvalidCastException ex)
+                {
+                    AddLog("ERROR: While casting e.Packet to ArtNetDmxPacket: " + ex);
+                }
             }
         }
 

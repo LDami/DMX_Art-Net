@@ -231,7 +231,7 @@ namespace DMX_Artnet
         {
             Thread t = new Thread(new ThreadStart(() =>
             {
-                Color defaultColor = label.BackColor;
+                Color defaultColor = Color.RoyalBlue;
                 if (label.InvokeRequired)
                     label.BeginInvoke(new Action(() => label.BackColor = Color.Green));
                 else

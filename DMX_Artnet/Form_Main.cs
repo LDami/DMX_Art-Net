@@ -51,6 +51,15 @@ namespace DMX_Artnet
                 List_Serial.Items.Add(port);
             }
             List_Serial.SelectedItem = currentSerialPort;
+
+            // Création du socket ArtNet
+            socket = new ArtNetSocket()
+            {
+                EnableBroadcast = true
+            };
+            socket.NewPacket += Socket_NewPacket;
+            socket.NewRdmPacket += Socket_NewRdmPacket;
+            socket.UnhandledException += Socket_UnhandledException;
         }
 
         private void Settings_Updated(Settings.SettingsUpdatedEventArgs e)
@@ -86,13 +95,6 @@ namespace DMX_Artnet
                 AddLog(address.Item1 + "-" + address.Item2);
             }
 
-            socket = new ArtNetSocket()
-            {
-                EnableBroadcast = true
-            };
-            socket.NewPacket += Socket_NewPacket;
-            socket.NewRdmPacket += Socket_NewRdmPacket;
-            socket.UnhandledException += Socket_UnhandledException;
             try
             {
                 socket.Open(IPAddress.Parse(Text_IPAddress.Text), IPAddress.Parse("255.255.255.0"));
@@ -115,10 +117,6 @@ namespace DMX_Artnet
         {
             Btn_Stop.Enabled = false;
             socket.Close();
-            socket.NewPacket -= Socket_NewPacket;
-            socket.NewRdmPacket -= Socket_NewRdmPacket;
-            socket.UnhandledException -= Socket_UnhandledException;
-            socket.Dispose();
             AddLog("Socket closed");
             Btn_Start.Enabled = true;
         }

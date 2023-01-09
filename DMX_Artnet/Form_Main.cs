@@ -215,10 +215,16 @@ namespace DMX_Artnet
         public void AddLog(string message)
         {
             if (RichText_Logs.InvokeRequired)
-                RichText_Logs.BeginInvoke(new Action(() => RichText_Logs.AppendText(DateTime.Now.ToString() + " " + message + "\r\n")));
+                RichText_Logs.BeginInvoke(new Action(() => {
+                    RichText_Logs.AppendText(DateTime.Now.ToString() + " " + message + "\r\n");
+                    RichText_Logs.ScrollToCaret();
+                }));
             else
+            {
                 RichText_Logs.AppendText(DateTime.Now.ToString() + " " + message + "\r\n");
-            RichText_Logs.ScrollToCaret();
+                RichText_Logs.ScrollToCaret();
+            }
+        }
         }
 
         public void FlashLabel(Label label)

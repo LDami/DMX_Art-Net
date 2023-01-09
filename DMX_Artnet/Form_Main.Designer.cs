@@ -41,6 +41,7 @@
             this.Label_PollReceived = new System.Windows.Forms.Label();
             this.Checkbox_DMXPacketLogs = new System.Windows.Forms.CheckBox();
             this.Checkbox_PollPacketLogs = new System.Windows.Forms.CheckBox();
+            this.Btn_ClearLogs = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Btn_Close
@@ -179,12 +180,25 @@
             this.Checkbox_PollPacketLogs.Text = "Poll Packets";
             this.Checkbox_PollPacketLogs.UseVisualStyleBackColor = true;
             // 
+            // Btn_ClearLogs
+            // 
+            this.Btn_ClearLogs.BackColor = System.Drawing.Color.RoyalBlue;
+            this.Btn_ClearLogs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_ClearLogs.Location = new System.Drawing.Point(1121, 34);
+            this.Btn_ClearLogs.Name = "Btn_ClearLogs";
+            this.Btn_ClearLogs.Size = new System.Drawing.Size(75, 23);
+            this.Btn_ClearLogs.TabIndex = 20;
+            this.Btn_ClearLogs.Text = "Clear";
+            this.Btn_ClearLogs.UseVisualStyleBackColor = false;
+            this.Btn_ClearLogs.Click += new System.EventHandler(this.Btn_ClearLogs_Click);
+            // 
             // Form_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MidnightBlue;
             this.ClientSize = new System.Drawing.Size(1208, 450);
+            this.Controls.Add(this.Btn_ClearLogs);
             this.Controls.Add(this.Checkbox_PollPacketLogs);
             this.Controls.Add(this.Checkbox_DMXPacketLogs);
             this.Controls.Add(this.Label_PollReceived);
@@ -223,6 +237,7 @@
         private System.Windows.Forms.Label Label_PollReceived;
         private System.Windows.Forms.CheckBox Checkbox_DMXPacketLogs;
         private System.Windows.Forms.CheckBox Checkbox_PollPacketLogs;
+        private System.Windows.Forms.Button Btn_ClearLogs;
     }
 }
 

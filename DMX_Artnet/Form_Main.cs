@@ -223,6 +223,10 @@ namespace DMX_Artnet
                 RichText_Logs.ScrollToCaret();
             }
         }
+
+        private void Btn_ClearLogs_Click(object sender, EventArgs e)
+        {
+            RichText_Logs.Clear();
         }
 
         public void FlashLabel(Label label)
